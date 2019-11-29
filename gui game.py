@@ -1,8 +1,9 @@
 from tkinter import *
+import time
 
 root = Tk()
 root.title("Tic Tac Toe")
-root.geometry('400x400')
+root.geometry('300x300')
 
 
 row1 = Frame(root)
@@ -14,62 +15,63 @@ row3.pack(expand=True, fill=BOTH)
 player_turn = Label(root, text="Player 1 start the game")
 player_turn.pack(side=LEFT)
 
-default = ['1','2','3','4','5','6','7','8','9']
-board = ['1','2','3','4','5','6','7','8','9']
-
 
 def player_one_entry(square):
     if square['text'] == "X" or square['text'] == "O":
-        print("You can't go there")
+        player_turn.config(text="You can't go there")
         return
     square.config(text="X")
     if iswinner("X"):
         player_turn.config(text="Player 1 Wins!!")
         return
+    player_turn.config(text="")
+    istie()
     player2_set()
 
 
 def player_two_entry(square):
     if square['text'] == "X" or square['text'] == "O":
-        print("You can't go there")
+        player_turn.config(text="You can't go there")
         return
     square.config(text="O")
     if iswinner("O"):
         player_turn.config(text="Player 2 Wins!!")
         return
+    player_turn.config(text="")
+    istie()
     player1_set()
 
 
-square1 = Button(row1, text=1)
+square1 = Button(row1, text=" ", width=2, height=2)
 square1.pack(side=LEFT, expand=True, fill=BOTH)
-square2 = Button(row1, text=2)
+square2 = Button(row1, text=" ", width=2, height=2)
 square2.pack(side=LEFT, expand=True, fill=BOTH)
-square3 = Button(row1, text=3)
+square3 = Button(row1, text=" ", width=2, height=2)
 square3.pack(side=LEFT, expand=True, fill=BOTH)
-square4 = Button(row2, text=4)
+square4 = Button(row2, text=" ", width=2, height=2)
 square4.pack(side=LEFT, expand=True, fill=BOTH)
-square5 = Button(row2, text=5)
+square5 = Button(row2, text=" ", width=2, height=2)
 square5.pack(side=LEFT, expand=True, fill=BOTH)
-square6 = Button(row2, text=6)
+square6 = Button(row2, text=" ", width=2, height=2)
 square6.pack(side=LEFT, expand=True, fill=BOTH)
-square7 = Button(row3, text=7)
+square7 = Button(row3, text=" ", width=2, height=2)
 square7.pack(side=LEFT, expand=True, fill=BOTH)
-square8 = Button(row3, text=8)
+square8 = Button(row3, text=" ", width=2, height=2)
 square8.pack(side=LEFT, expand=True, fill=BOTH)
-square9 = Button(row3, text=9)
+square9 = Button(row3, text=" ", width=2, height=2)
 square9.pack(side=LEFT, expand=True, fill=BOTH)
 
 
 def clearing():
-    square1.config(text=1)
-    square2.config(text=2)
-    square3.config(text=3)
-    square4.config(text=4)
-    square5.config(text=5)
-    square6.config(text=6)
-    square7.config(text=7)
-    square8.config(text=8)
-    square9.config(text=9)
+    square1.config(text=" ")
+    square2.config(text=" ")
+    square3.config(text=" ")
+    square4.config(text=" ")
+    square5.config(text=" ")
+    square6.config(text=" ")
+    square7.config(text=" ")
+    square8.config(text=" ")
+    square9.config(text=" ")
     player_turn.config(text="Player 1 start the game")
 
 
@@ -112,21 +114,21 @@ def iswinner(le):
            (square3['text'] == le and square5['text'] == le and square7['text'] == le))
 
 
-def playing_game():
-    player1_set()
-    if iswinner("X"):
-        player_turn.config(text="Player 1 Wins!!")
-        return
-    elif iswinner("O"):
-        player_turn.config(text="Player 2 Wins!!")
-        return
-    player_turn.config(text="Player 2 your turn")
-    print("1")
+def istie():
+    if (square1['text'] == "X" or square1['text'] == "O"):
+        if (square2['text'] == "X" or square2['text'] == "O"):
+            if (square3['text'] == "X" or square3['text'] == "O"):
+                if (square4['text'] == "X" or square4['text'] == "O"):
+                    if (square5['text'] == "X" or square5['text'] == "O"):
+                        if (square6['text'] == "X" or square6['text'] == "O"):
+                            if (square7['text'] == "X" or square7['text'] == "O"):
+                                if (square8['text'] == "X" or square8['text'] == "O"):
+                                    if (square9['text'] == "X" or square9['text'] == "O"):
+                                        player_turn.config(text="Tie Game")
+                                        return
 
 
-playing_game()
+player1_set()
 
 
 root.mainloop()
-
-
